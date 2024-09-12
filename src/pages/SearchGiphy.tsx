@@ -1,5 +1,5 @@
 import { Button, Pagination, TextField } from "@mui/material";
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import { Giphy } from "../interfaces/Giphy";
 import { searchGiphies } from "../services/giphy";
 import "./styles.css";
@@ -14,9 +14,10 @@ interface Giphies {
 
 const SearchGiphy = () => {
   const [giphyToBeSearched, setGiphyToBeSearched] = useState("");
+
   const [giphies, setGiphies] = useState<Giphies>({
     data: [],
-    pagination: { currentPage: 1, total: 1 },
+    pagination: { currentPage: 1, total: 0 },
   });
 
   const onSearchChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -49,12 +50,15 @@ const SearchGiphy = () => {
     setGiphies({ data: [], pagination: { currentPage: 1, total: 0 } });
   };
 
+  useEffect(() => {
+    if (giphyToBeSearched) getGiphies();
+  }, [giphies.pagination.currentPage]);
+
   const onChangePagination = (_: unknown, value: number) => {
     setGiphies((prev) => ({
       ...prev,
       pagination: { ...prev.pagination, currentPage: value },
     }));
-    getGiphies();
   };
 
   return (
