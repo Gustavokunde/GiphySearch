@@ -1,4 +1,5 @@
-import { Giphy } from "../interfaces/Giphy";
+import { Giphy } from "../../interfaces/Giphy";
+import "./style.css";
 
 const GiphiesList = (props: { data: Giphy[] }) => {
   const { data } = props;

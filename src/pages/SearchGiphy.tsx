@@ -1,6 +1,6 @@
 import { Button, Pagination, TextField } from "@mui/material";
 import { ChangeEventHandler, useState } from "react";
-import GiphiesList from "../components/GiphiesList";
+import GiphiesList from "../components/GiphiesList/GiphiesList";
 import { useSearchGiphies } from "../hooks/useSearchGiphies";
 import "./styles.css";
 
